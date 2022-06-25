@@ -1,0 +1,11 @@
+.error {
+	text-align: center;
+	position: relative;
+    background: white;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 30%;
+	margin: 5% auto;
+}

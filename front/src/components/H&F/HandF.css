@@ -1,0 +1,65 @@
+header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color:rgb(126, 143, 72);
+    border: 5px solid rgb(126, 143, 72);
+}
+.namepages{
+    text-decoration: none;
+    color: black;
+}
+.link{
+    display: flex;
+    justify-content: center;
+}
+.btnAuth{
+    align-items: center;
+    margin: 15px;
+    border-radius: 10px;
+}
+.buttonSignup{
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    background-color: greenyellow;
+    padding: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(67, 71, 152);
+    text-decoration: none;
+}
+.buttonLogin{
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    background-color: rgb(255, 95, 47);
+    padding: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(67, 71, 152);
+    text-decoration: none;
+}
+footer{
+    background-color: rgba(79, 33, 0, 0.558);
+    color: white;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+footer p{
+    margin: 0 auto;
+    justify-content: center;
+    padding: 30px;
+}
+@media (max-width: 450px) {
+    .namepages{
+        font-size: 25px;
+    }
+}
+@media (max-width: 365px) {
+    .btnAuth{
+        margin: 15px 5px;
+    }
+    .namepages{
+        font-size: 20px;
+    }
+}

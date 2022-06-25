@@ -1,0 +1,23 @@
+#sukurti_duomenys{
+    position: relative;
+    margin: 5px auto;
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    background-color: white;
+    max-width: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.454);
+    border-radius: 4px;
+    box-shadow: 0 0 10px;
+}
+#sukurti_duomenys input{
+    font-size: 14px;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+.buttons button{
+    margin: 5px;
+}

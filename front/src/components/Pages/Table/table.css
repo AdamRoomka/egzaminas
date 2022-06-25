@@ -1,0 +1,100 @@
+.sukurtibtn{
+  position: relative;
+  padding: 3px;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 4px;
+  background-color: rgb(255, 236, 127);
+  margin: 20px;
+}
+#table{
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 10px;
+    width: 60%;
+  }
+  
+  #table th, #table td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  #table tr:nth-child(even) {background-color: #f2f2f2;}
+
+.buttonedit{
+    padding: 3px;
+    width: 70%;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 4px;
+    background-color: aquamarine;
+    margin-right: 5px;
+}
+.buttondelete{
+    padding: 3px;
+    width: 70%;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 4px;
+    background-color: rgb(255, 127, 127);
+}
+.editchild{
+  font-size: 15px;
+}
+.buttonsubmit{
+  padding: 3px;
+  justify-self: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 4px;
+  background-color: aquamarine;
+  margin: 0 5px 0 5px;
+}
+.buttoncancel{
+  padding: 3px;
+  justify-self: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 4px;
+  background-color: rgb(255, 127, 127);
+  margin: 0 5px 0 5px;
+}
+.d-flex{
+  display: flex;
+}
+
+@media (max-width: 450px) {
+  #table th, #table td {
+    padding: 5px;
+  }
+  .d-flex{
+    display: block;
+  }
+  .buttonedit{
+    width: 100%;
+    margin: 0 auto;
+  }
+  .buttondelete{
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 365px) {
+  #table th, #table td {
+    padding: 0px;
+  }
+  .d-flex{
+    display: block;
+  }
+  .buttonedit{
+    width: 100%;
+    margin: 0 auto;
+  }
+  .buttondelete{
+    width: 100%;
+    margin: 0 auto;
+  }
+}
