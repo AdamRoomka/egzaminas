@@ -22,6 +22,199 @@ const jwt = require("jsonwebtoken");
     }
   };
 
+  exports.getUserById = async (req, res) => {
+    try {
+      const users = await Users.findById(req.params.id);
+      res.status(200).json({
+        status: "success",
+        data: {
+          user: users,
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err,
+      });
+    }
+  };
+  
+  exports.createUser = async (req, res) => {
+    try {
+      const newUser = await Users.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        passwordConfirm: req.body.passwordConfirm,
+      });
+
+      const token = jwt.sign({ id: newUser._id }, "labas", {
+        expiresIn: "90d",
+      });
+
+      console.log("Signup tokenas");
+      console.log(token);
+
+      res.status(200).json({
+        status: "success",
+        token: token,
+        data: {
+          user: newUser,
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err,
+      });
+    }
+  };
+
+  exports.getEmail = async (req, res) => {
+    console.log(req.query);
+    try {
+      const user = await Users.exists(req.query);
+
+      res.status(200).json({
+        status: "success",
+        results: user.length,
+        data: {
+          users: user,
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err,
+      });
+    }
+  };
+
+exports.loginUser = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  // 1) Ar yra vartotojo vardas ir slaptažodis
+  if (!email || !password) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Neįvestas prisijungimo vardas arba slaptažodis.",
+    });
+  }
+
+  // 2) Randame vartotoja ir patikrinsime ar tinka passwordas
+  const user = await Users.findOne({ email }).select("+password");
+
+  console.log(user);
+
+
+  const token = jwt.sign({ id: user._id }, "labas", {
+    expiresIn: "90d",
+  });
+
+  console.log("Login tokenas");
+  console.log(token);
+
+  res.status(200).json({
+    status: "success",
+    token: token,
+  });
+};
+
+exports.getAllUserItems = async (req, res) => {
+  try {
+    const users = await Users.find({ _id: req.params.id });
+    const { items } = users[0];
+
+    res.status(200).json({
+      status: "success",
+      results: users.length,
+      data: {
+        items: items,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "error",
+      message: err,
+    });
+  }
+};
+
+exports.createUserItems = async (req, res) => {
+  try {
+    const updatedItems = await Users.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { items: req.body } },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json({
+      status: "success",
+      data: {
+        limit: updatedItems,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
+exports.findItemAndUpdate = async (req, res) => {
+  console.log(req.params.id);
+  console.log(req.params.subID);
+  console.log(req.body);
+  try {
+    const updateItem = await Users.findOneAndUpdate(
+      { _id: req.params.id, "items._id": req.params.subID },
+      {
+        $set: {
+          "items.$.name": req.body.name,
+          "items.$.category": req.body.category,
+          "items.$.date": req.body.date,
+        },
+      }
+    );
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        items: updateItem,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
+exports.findItemAndDelete = async (req, res) => {
+  try {
+    await Users.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $pull: {
+          items: { _id: req.params.subID },
+        },
+      }
+    );
+    res.status(200).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err,
+    });
+  }
+};
+
   exports.updateUser = async (req, res) => {
     console.log(req.params.id);
     console.log(req.body);
@@ -60,91 +253,6 @@ const jwt = require("jsonwebtoken");
         });
       }
     };
-
-// Get user by id
-exports.getUserById = async (req, res) => {
-  try {
-    const users = await Users.findById(req.params.id);
-    res.status(200).json({
-      status: "success",
-      data: {
-        user: users,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err,
-    });
-  }
-};
-
-
-exports.createUser = async (req, res) => {
-  try {
-    const newUser = await Users.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm,
-    });
-
-    const token = jwt.sign({ id: newUser._id }, "labas", {
-      expiresIn: "90d",
-    });
-
-    console.log("Signup tokenas");
-    console.log(token);
-
-    res.status(200).json({
-      status: "success",
-      token: token,
-      data: {
-        user: newUser,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err,
-    });
-  }
-};
-
-
-
-
-exports.loginUser = async (req, res, next) => {
-  const { email, password } = req.body;
-
-  // 1) Ar yra vartotojo vardas ir slaptažodis
-  if (!email || !password) {
-    return res.status(404).json({
-      status: "fail",
-      message: "Neįvestas prisijungimo vardas arba slaptažodis.",
-    });
-  }
-
-  // 2) Randame vartotoja ir patikrinsime ar tinka passwordas
-  const user = await Users.findOne({ email }).select("+password");
-
-  console.log(user);
-
-
-  const token = jwt.sign({ id: user._id }, "labas", {
-    expiresIn: "90d",
-  });
-
-  console.log("Login tokenas");
-  console.log(token);
-
-  res.status(200).json({
-    status: "success",
-    token: token,
-  });
-};
-
-
 
 exports.protect = async (req, res, next) => {
   // 1) Getting token and check of it's there

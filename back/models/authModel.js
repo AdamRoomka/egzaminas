@@ -2,7 +2,15 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// DB schema
+const ItemsSchema = mongoose.Schema(
+  {
+    name: { type: String, trim: true, maxLength: 50, required: true },
+    category: { type: String },
+    date: { type: Date },
+  },
+  { timestamps: true }
+);
+
 const usersSchema = new mongoose.Schema(
   {
     role: {
@@ -25,6 +33,7 @@ const usersSchema = new mongoose.Schema(
       minlength: [8, "Password is too short (Minimum length is 8)"],
       required: [true, "Password is required"],
     },
+    items: [ItemsSchema],
   },
   { timestamps: true }
 );
@@ -51,14 +60,5 @@ usersSchema.methods.jwtGenerateToken = function () {
 
 // ModelDb table name
 const Users = new mongoose.model("Users", usersSchema);
-
-// const testUser = new Users({
-//   role: "user",
-//   username: "User1",
-//   email: "User1@gmai.com",
-//   password: "Rokas123456",
-// });
-
-// testUser.save();
 
 module.exports = Users;

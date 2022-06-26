@@ -1,8 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import {
-  getUserById,
-  loginUser,
-} from "../../api/lib/UsersApi";
+import { getUserById, loginUser } from "../../api/lib/UsersApi";
 
 const UserContext = createContext();
 

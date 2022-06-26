@@ -15,11 +15,10 @@ function Login() {
   } = useForm();
 
   let navigate = useNavigate();
-
   function onSubmit(data) {
     doLogin(data)
       .then((res) => {
-        let email = res.data.email;
+        let user = res.data.user;
 
         swal({
           text: "Pavyko prisijungti!",
@@ -49,18 +48,18 @@ function Login() {
         <fieldset>
             <h2 className="fs-title">Prisijungti</h2><br />
             <input
-            type="email"
-            className="home-input"
-            id="email-login"
-            placeholder="El. paštas"
-            {...register("email", {
-              required: "El.paštas būtinas",
-              maxLength: {
-                value: 50,
-                message: "Nedaugiau kaip 50 simbolių",
-              },
-            })}
-          />
+              type="email"
+              className="home-input"
+              id="email-login"
+              placeholder="El. paštas"
+              {...register("email", {
+                required: "El.paštas būtinas",
+                maxLength: {
+                  value: 50,
+                  message: "Nedaugiau kaip 50 simbolių",
+                },
+              })}
+            />
           <div className="error text-danger fw-light m-2">
             {errors.email?.message}
           </div>
