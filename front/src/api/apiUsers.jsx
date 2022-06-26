@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosUser = axios.create({
-  baseURL: `http://localhost:3001/api/v1/users`,
+  baseURL: `http://localhost:3001/api/v1/auth`,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

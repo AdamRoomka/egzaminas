@@ -1,10 +1,9 @@
 import React from 'react'
 import swal from "sweetalert";
 import { useForm } from "react-hook-form";
-import { createUser } from "../../api/lib/UsersApi";
-import './auth.css'
+import { createUser } from "../../../../../api/lib/UsersApi";
 
-function Registration() {
+function CreateUser({setRender}) {
 
     const { //CreateUser
         watch,
@@ -23,6 +22,7 @@ function Registration() {
                 button: "Puiku",
                 timer: 2000,
             });
+            setRender(prevState => !prevState)
             })
             .catch((error) => {
             swal({
@@ -39,7 +39,7 @@ function Registration() {
   return (
     <form id='msform' onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-            <h2 className="fs-title">Create your account</h2><br />
+            <h2 className="fs-title">Sukurti vartotoja</h2><br />
             <input 
                 type="text" 
                 name="name" 
@@ -128,4 +128,4 @@ function Registration() {
   )
 }
 
-export default Registration
+export default CreateUser

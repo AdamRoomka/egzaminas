@@ -4,6 +4,9 @@ header{
     background-color:rgb(126, 143, 72);
     border: 5px solid rgb(126, 143, 72);
 }
+body{
+    margin-bottom: 79px;
+}
 .namepages{
     text-decoration: none;
     color: black;
@@ -38,11 +41,12 @@ header{
     text-decoration: none;
 }
 footer{
-    background-color: rgba(79, 33, 0, 0.558);
+    background-color: rgb(84, 40, 8);
     color: white;
     display: flex;
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
     width: 100%;
 }
 footer p{

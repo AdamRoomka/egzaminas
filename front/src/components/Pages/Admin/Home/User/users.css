@@ -1,0 +1,15 @@
+.usersButton{
+    background-color: wheat;
+    width: 20px;
+}
+@media (max-width: 950px) {
+    .resolution {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 808px) {
+    .resolution #id {
+        display: none;
+    }
+}

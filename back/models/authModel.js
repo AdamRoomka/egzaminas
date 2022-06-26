@@ -1,24 +1,64 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const authSchema = new mongoose.Schema({
-    name:{
-        type: String,
+// DB schema
+const usersSchema = new mongoose.Schema(
+  {
+    role: {
+      type: String,
+      default: "user",
+      enum: ["user", "admin"],
     },
-    email:{
-        type: String,
-        lowercase: true,
-        unique: true,
+    name: {
+      type: String,
+      required: [true, "Username is required"],
+    },
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      lowercase: true,
+      unique: true,
     },
     password: {
-        type: String,
+      type: String,
+      minlength: [8, "Password is too short (Minimum length is 8)"],
+      required: [true, "Password is required"],
     },
-    role: {
-        type: String,
-        default: "user",
-        enum: ["user", "admin"],
-      }
+  },
+  { timestamps: true }
+);
+
+// encrypting password before saving
+usersSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+  this.password = await bcrypt.hash(this.password, 10);
 });
 
-const AuthModel = new mongoose.model("users", authSchema);
+// verify password
+usersSchema.methods.comparePassword = async function (yourPassword) {
+  return await bcrypt.compare(yourPassword, this.password);
+};
 
-module.exports = AuthModel;
+// get the token
+usersSchema.methods.jwtGenerateToken = function () {
+  return jwt.sign({ id: this.id }, `${process.env.JWT_SECRET}`, {
+    expiresIn: 3600,
+  });
+};
+
+// ModelDb table name
+const Users = new mongoose.model("Users", usersSchema);
+
+// const testUser = new Users({
+//   role: "user",
+//   username: "User1",
+//   email: "User1@gmai.com",
+//   password: "Rokas123456",
+// });
+
+// testUser.save();
+
+module.exports = Users;

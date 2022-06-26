@@ -8,8 +8,10 @@ function TableList() {
         <td>firstchild</td>
         <td>secondchild</td>
         <td>thirdchild</td>
-        <td className='d-flex'><button className='buttonedit'>Edit</button>
-        <button className='buttondelete'>Delete</button></td>
+        <td className='d-flex'>
+          <button className='buttonedit'>Edit</button>
+          <button className='buttondelete'>Delete</button>
+        </td>
     </tr>
     </>
   )
