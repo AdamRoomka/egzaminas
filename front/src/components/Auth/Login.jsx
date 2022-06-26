@@ -28,7 +28,7 @@ function Login() {
         });
         if (res.status === 200) {
           setTimeout(() => {
-            navigate("/Home");
+            navigate("/");
           }, 1000);
         }
       })

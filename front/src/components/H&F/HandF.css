@@ -40,6 +40,15 @@ body{
     color: rgb(67, 71, 152);
     text-decoration: none;
 }
+.buttonLogOut{
+    color: white;
+    text-decoration: none;
+}
+.buttonLogOut:hover{
+    box-shadow: inset 0px 0px 10px black;
+    border-radius: 4px;
+    padding: 2px;
+}
 footer{
     background-color: rgb(84, 40, 8);
     color: white;

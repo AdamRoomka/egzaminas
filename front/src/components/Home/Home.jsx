@@ -4,10 +4,11 @@ import Create from '../Pages/CreateList/Create'
 
 function Home() {
   const [open, setOpen] = useState(false);
-
+  
   const toggleAddPopup = () => {
     setOpen(!open);
   }
+
 
   return (
     <>
