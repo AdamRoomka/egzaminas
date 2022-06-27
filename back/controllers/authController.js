@@ -22,6 +22,23 @@ const jwt = require("jsonwebtoken");
     }
   };
 
+  exports.getBookById = async (req, res) => {
+    try {
+      const user = await Users.findById(req.params.id);
+      res.status(200).json({
+        status: "success",
+        data: {
+          users: user,
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err,
+      });
+    }
+  };
+
   exports.getUserById = async (req, res) => {
     try {
       const users = await Users.findById(req.params.id);

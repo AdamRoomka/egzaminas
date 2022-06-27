@@ -1,4 +1,13 @@
 .book{
+    width: 60%;
     margin: 20px auto;
-    background-color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+.buttonOrder{
+    margin: 5px;
+    width: 60px;
+    border-radius: 5px;
 }

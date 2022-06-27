@@ -12,6 +12,7 @@ const {
   deleteUserById,
   createUser,
   getEmail,
+  getBookById,
   loginUser,
 } = require("../controllers/authController");
 
@@ -26,5 +27,6 @@ router.route("/deleteUser/:id").patch(deleteUserById);
 router.route("/:id/items/upd/:subID").patch(findBooksmAndUpdate);
 router.route("/:id/items/dlt/:subID").patch(findBooksAndDelete);
 router.route("/:id/books").get(getAllBooks).patch(createUserBooks);
+router.route("/book/:id").get(getBookById)
 
 module.exports = router;

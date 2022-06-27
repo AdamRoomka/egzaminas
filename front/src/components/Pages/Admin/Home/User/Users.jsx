@@ -10,13 +10,6 @@ function Users() {
   
   let navigate = useNavigate();
 
-  useEffect(() => { 
-
-      if(localStorage.getItem('role') !== "admin"){
-          navigate('/')
-      }
-
-    }, []);
 
   const [users, setUsers] = useState([])
   const [render, setRender] = useState(false)

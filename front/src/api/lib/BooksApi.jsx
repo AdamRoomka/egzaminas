@@ -7,11 +7,15 @@ import swal from "sweetalert";
     return res;
   }
 
+  export async function getBookById(id) {
+    const res = await axiosUser.get(`/${id}`);
+    return res;
+  }
+
   export async function createBook(id) {
     const res = await axiosUser.get(`/create`);
     return res;
   }
-
   
   export async function findBooksAndUpdate(id, subID) {
     const res = await axiosUser.get(`/${id}/book/update/${subID}`);
