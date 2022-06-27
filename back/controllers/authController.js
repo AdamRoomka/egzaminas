@@ -121,16 +121,16 @@ exports.loginUser = async (req, res, next) => {
   });
 };
 
-exports.getAllUserItems = async (req, res) => {
+exports.getAllBooks = async (req, res) => {
   try {
     const users = await Users.find({ _id: req.params.id });
-    const { items } = users[0];
+    const { books } = users[0];
 
     res.status(200).json({
       status: "success",
       results: users.length,
       data: {
-        items: items,
+        books: books,
       },
     });
   } catch (err) {
@@ -141,11 +141,11 @@ exports.getAllUserItems = async (req, res) => {
   }
 };
 
-exports.createUserItems = async (req, res) => {
+exports.createUserBooks = async (req, res) => {
   try {
-    const updatedItems = await Users.findOneAndUpdate(
+    const updatedBooks = await Users.findOneAndUpdate(
       { _id: req.params.id },
-      { $push: { items: req.body } },
+      { $push: { books: req.body } },
       {
         new: true,
       }
@@ -153,7 +153,7 @@ exports.createUserItems = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        limit: updatedItems,
+        limit: updatedBooks,
       },
     });
   } catch (err) {
@@ -164,18 +164,18 @@ exports.createUserItems = async (req, res) => {
   }
 };
 
-exports.findItemAndUpdate = async (req, res) => {
+exports.findBooksmAndUpdate = async (req, res) => {
   console.log(req.params.id);
   console.log(req.params.subID);
   console.log(req.body);
   try {
-    const updateItem = await Users.findOneAndUpdate(
-      { _id: req.params.id, "items._id": req.params.subID },
+    const updateBook = await Users.findOneAndUpdate(
+      { _id: req.params.id, "books._id": req.params.subID },
       {
         $set: {
-          "items.$.name": req.body.name,
-          "items.$.category": req.body.category,
-          "items.$.date": req.body.date,
+          "books.$.name": req.body.name,
+          "books.$.category": req.body.category,
+          "books.$.date": req.body.date,
         },
       }
     );
@@ -183,7 +183,7 @@ exports.findItemAndUpdate = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        items: updateItem,
+        books: updateBook,
       },
     });
   } catch (err) {
@@ -194,13 +194,13 @@ exports.findItemAndUpdate = async (req, res) => {
   }
 };
 
-exports.findItemAndDelete = async (req, res) => {
+exports.findBooksAndDelete = async (req, res) => {
   try {
     await Users.findOneAndUpdate(
       { _id: req.params.id },
       {
         $pull: {
-          items: { _id: req.params.subID },
+          books: { _id: req.params.subID },
         },
       }
     );

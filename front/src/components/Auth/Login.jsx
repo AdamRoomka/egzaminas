@@ -1,11 +1,20 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useGlobalUserContext, UserContext } from "../../untils/context/UserContext";
-import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import './auth.css'
 
-function Login() {
+function Login({render, setRender}) {
+
+    useEffect(() => { 
+
+        if(localStorage.getItem("user") !== null){
+            navigate('/')
+        }
+
+      }, []);
+
   const { doLogin } = useGlobalUserContext(UserContext);
 
   const {
@@ -29,6 +38,7 @@ function Login() {
         if (res.status === 200) {
           setTimeout(() => {
             navigate("/");
+            setRender(prevState => !prevState)
           }, 1000);
         }
       })

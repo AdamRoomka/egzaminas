@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useGlobalUserContext, UserContext } from "../../untils/context/UserContext";
 import './HandF.css'
 
-function Header() {
+function Header({render, setRender}) {
   const { signOut } = useGlobalUserContext(UserContext);
   const [ registered, setRegistered ] = useState(false);
 
@@ -12,7 +12,8 @@ function Header() {
     if(localStorage.getItem("user") === null){
       setRegistered(!registered)
     }
-  }, []);
+  }, [render]);
+  let name = localStorage.getItem("name")
   
   return (
     <header>
@@ -26,7 +27,7 @@ function Header() {
           }
           {!registered && 
             <>
-              <div className='btnAuth'><h4>Sveiki</h4></div>
+              <div className='btnAuth d-flex'><h4>Sveiki </h4><h4 className='red'>{name}</h4></div>
               <div className='btnAuth'><Link to="/login" className='buttonLogOut' onClick={signOut}>SignOut</Link></div>
             </>
           }

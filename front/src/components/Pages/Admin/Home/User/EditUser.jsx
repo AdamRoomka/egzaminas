@@ -7,7 +7,6 @@ function EditUser({ id, deleteUsers, subId, setRender, onSubmit, onCancel, defau
 
     const [name, setName] = useState(defaultData.name);
     const [email, setEmail] = useState(defaultData.email);
-    const [password, setPassword] = useState(defaultData.password);
     const [role, setRole] = useState(defaultData.role);
 const bcrypt = require("bcryptjs");
 
@@ -18,11 +17,9 @@ const bcrypt = require("bcryptjs");
     }
 
     const editFlows = () => {
-        // const hash = bcrypt.hashSync(password, 10);
         let userSet = {
             name: name,
             email: email,
-            // password: hash,
             role: role
         };
         onSubmit(subId, userSet, defaultData)

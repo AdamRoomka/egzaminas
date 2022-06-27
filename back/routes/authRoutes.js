@@ -4,10 +4,10 @@ const router = express.Router();
 const {
   getAllUsers,
   getUserById,
-  getAllUserItems,
-  createUserItems,
-  findItemAndUpdate,
-  findItemAndDelete,
+  getAllBooks,
+  createUserBooks,
+  findBooksmAndUpdate,
+  findBooksAndDelete,
   updateUser,
   deleteUserById,
   createUser,
@@ -23,8 +23,8 @@ router.route("/:id").get(getUserById);
 router.route("/update/:id").patch(updateUser);
 router.route("/deleteUser/:id").patch(deleteUserById);
 
-router.route("/:id/items/upd/:subID").patch(findItemAndUpdate);
-router.route("/:id/items/dlt/:subID").patch(findItemAndDelete);
-router.route("/:id/items").get(getAllUserItems).patch(createUserItems);
+router.route("/:id/items/upd/:subID").patch(findBooksmAndUpdate);
+router.route("/:id/items/dlt/:subID").patch(findBooksAndDelete);
+router.route("/:id/books").get(getAllBooks).patch(createUserBooks);
 
 module.exports = router;

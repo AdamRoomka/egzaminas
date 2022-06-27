@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import Table from '../Pages/Table/Table'
-import Create from '../Pages/CreateList/Create'
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
   const [open, setOpen] = useState(false);
@@ -8,16 +7,21 @@ function Home() {
   const toggleAddPopup = () => {
     setOpen(!open);
   }
+  let navigate = useNavigate();
 
+  useEffect(() => { 
+
+    if(localStorage.getItem("user") === null){
+        navigate('/register')
+    }
+
+  }, []);
 
   return (
     <>
-      <button className='sukurtibtn' onClick={toggleAddPopup}>Sukurti</button>
-      {open ? (
-        <Create />
-      ) :('')}
     <div className='center'>
-      <Table />
+      <Link to="/books" className="buttonedit">Order Books</Link>
+      <Link to="/profile" className="buttondelete">Profile Table</Link>
     </div>
     </>
   )

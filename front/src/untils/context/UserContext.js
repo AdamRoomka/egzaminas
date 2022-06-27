@@ -21,7 +21,10 @@ const UserProvider = ({ children }) => {
   async function doLogin(data) {
     let result = await loginUser(data).then((res) => {
       setUserData(res.data.user);
+      console.log(res.data.user.role)
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("role", JSON.stringify(res.data.user.role));
+      localStorage.setItem("name", JSON.stringify(res.data.user.name));
       localStorage.setItem("token", JSON.stringify(res.data.token));
 
       return res;
@@ -33,6 +36,7 @@ const UserProvider = ({ children }) => {
     setUserData({});
     localStorage.clear();
   }
+
 
   return (
     <UserContext.Provider

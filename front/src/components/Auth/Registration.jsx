@@ -1,10 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { useForm } from "react-hook-form";
 import { createUser } from "../../api/lib/UsersApi";
 import './auth.css'
 
 function Registration() {
+
+    let navigate = useNavigate();
+
+    useEffect(() => { 
+
+        if(localStorage.getItem("user") !== null){
+            navigate('/')
+        }
+
+      }, []);
 
     const { //CreateUser
         watch,

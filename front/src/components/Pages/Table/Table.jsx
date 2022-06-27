@@ -1,34 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TableList from './TableList'
-import TableEdit from './TableEdit'
 import './table.css'
+import { useGlobalUserContext } from "../../../untils/context/UserContext";
 
 function Table() {
-    const [editId, ] = useState(  ); // 
+    const [render, setRender] = useState(false)
+
+  const { userData } = useGlobalUserContext();
+
+  if (Object.keys(userData).length !== 0) {
+    var userBooksData = userData.books.map((book) => {
+      return (
+            <TableList
+                key={book._id}
+                title={book.name}
+                category={book.category}
+                date={book.date}
+                defaultData={book}
+                bookID={book._id}
+            />
+      );
+    });
+  }
   return (
       <table id='table'>
-          <tr>
-            <th></th>
-            <th>first</th>
-            <th>second</th>
-            <th>third</th>
-            <th></th>
-          </tr>
-          {editId ? (
-              <TableEdit 
-                  // subId={filterData._id}
-                  // id={userId}
-                  // defaultData={filterData}
-                  // onCancel={cancelEdit}
-                  // onSubmit={submitEdit}
-              />
-          ) : (
-              <TableList 
-                  // onEdit={handleEdit}
-                  // onDelete={handleDelete}
-              />
-          )
-          }
+          <tbody>
+            <tr>
+                <th></th>
+                <th>title</th>
+                <th>category</th>
+                <th>date</th>
+                <th></th>
+            </tr>
+            {userBooksData}
+          </tbody>    
       </table>
   )
 }

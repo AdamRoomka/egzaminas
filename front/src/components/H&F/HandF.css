@@ -63,6 +63,10 @@ footer p{
     justify-content: center;
     padding: 30px;
 }
+.red{
+    color: rgb(179, 36, 36);
+    margin-left: 5px;
+}
 @media (max-width: 450px) {
     .namepages{
         font-size: 25px;

@@ -38,80 +38,76 @@ export async function loginUser(data) {
   return res;
 }
 
+//Books
 
+export async function getAllBooks(id) {
+  const res = await axiosUser.get(`/${id}/books`);
+  return res;
+}
 
+export async function createUserBooks(id, data) {
+  const response = await axiosUser
+    .patch(`/${id}/items/`, JSON.stringify(data))
+    .then((result) => {
+      swal({
+        text: "Įrašyta!",
+        button: "Puiku",
+        icon: "success",
+        timer: 2000,
+      });
+    })
+    .catch((error) => {
+      swal({
+        text: "Klaida!",
+        icon: "error",
+        button: "Gerai",
+        timer: 2000,
+      });
+    });
 
+  return response;
+}
 
-// //ITEMS
+export async function findBooksAndUpdate(data, id, subID) {
+  const response = await axiosUser
+    .patch(`/${id}/items/upd/${subID}`, JSON.stringify(data))
+    .then((result) => {
+      swal({
+        text: "Atnaujinta!",
+        icon: "success",
+        button: "Gerai",
+        timer: 2000,
+      });
+    })
+    .catch((error) => {
+      swal({
+        text: "Klaida!",
+        icon: "error",
+        button: "Gerai",
+        timer: 2000,
+      });
+    });
 
-// export async function getAllUserItems(id) {
-//   const res = await axiosUser.get(`/${id}/items`);
-//   return res;
-// }
+  return response;
+}
 
-// export async function createUserItems(id, data) {
-//   const response = await axiosUser
-//     .patch(`/${id}/items/`, JSON.stringify(data))
-//     .then((result) => {
-//       swal({
-//         text: "Įrašyta!",
-//         button: "Puiku",
-//         icon: "success",
-//         timer: 2000,
-//       });
-//     })
-//     .catch((error) => {
-//       swal({
-//         text: "Klaida!",
-//         icon: "error",
-//         button: "Gerai",
-//         timer: 2000,
-//       });
-//     });
-
-//   return response;
-// }
-
-// export async function findItemAndUpdate(data, id, subID) {
-//   const response = await axiosUser
-//     .patch(`/${id}/items/upd/${subID}`, JSON.stringify(data))
-//     .then((result) => {
-//       swal({
-//         text: "Atnaujinta!",
-//         icon: "success",
-//         button: "Gerai",
-//         timer: 2000,
-//       });
-//     })
-//     .catch((error) => {
-//       swal({
-//         text: "Klaida!",
-//         icon: "error",
-//         button: "Gerai",
-//         timer: 2000,
-//       });
-//     });
-
-//   return response;
-// }
-
-// export async function findItemAndDelete(id, subID) {
-//   const response = await axiosUser
-//     .patch(`/${id}/items/dlt/${subID}`)
-//     .then((result) => {
-//       swal({
-//         text: "Ištrinta!",
-//         icon: "success",
-//         button: "Gerai",
-//         timer: 2000,
-//       });
-//     })
-//     .catch((error) => {
-//       swal({
-//         text: "Klaida!",
-//         icon: "error",
-//         button: "Gerai",
-//         timer: 2000,
-//       });
-//     });
-// }
+export async function findBooksAndDelete(id, subID) {
+  const response = await axiosUser
+    .patch(`/${id}/items/dlt/${subID}`)
+    .then((result) => {
+      swal({
+        text: "Ištrinta!",
+        icon: "success",
+        button: "Gerai",
+        timer: 2000,
+      });
+    })
+    .catch((error) => {
+      swal({
+        text: "Klaida!",
+        icon: "error",
+        button: "Gerai",
+        timer: 2000,
+      });
+    });
+}

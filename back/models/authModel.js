@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const ItemsSchema = mongoose.Schema(
+const BooksSchema = mongoose.Schema(
   {
     name: { type: String, trim: true, maxLength: 50, required: true },
     category: { type: String },
@@ -33,7 +33,7 @@ const usersSchema = new mongoose.Schema(
       minlength: [8, "Password is too short (Minimum length is 8)"],
       required: [true, "Password is required"],
     },
-    items: [ItemsSchema],
+    books: [BooksSchema],
   },
   { timestamps: true }
 );

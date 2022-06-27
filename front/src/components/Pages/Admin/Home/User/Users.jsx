@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { getAllUsers, createUser, deleteUsers, updateUser } from '../../../../../api/lib/UsersApi'
 import UserList from './UserList'
 import EditUser from './EditUser'
@@ -7,6 +7,16 @@ import EditPass from './EditPass'
 import CreateUser from './CreateUser'
 
 function Users() {
+  
+  let navigate = useNavigate();
+
+  useEffect(() => { 
+
+      if(localStorage.getItem('role') !== "admin"){
+          navigate('/')
+      }
+
+    }, []);
 
   const [users, setUsers] = useState([])
   const [render, setRender] = useState(false)
@@ -53,11 +63,10 @@ function Users() {
     //---CancelEdit---//
     function cancelEdit() {
         setEditId('');
-        console.log('canceling');
     }
+    
     function cancelEditPass() {
         setEditIdPass('');
-        console.log('canceling');
     }
 
 

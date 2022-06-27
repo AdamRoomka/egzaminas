@@ -1,17 +1,14 @@
 import React from 'react'
 
-function TableList() {
+function TableList({title, category, date, bookID, findBooksAndDelete, onEdit}) {
+  let Date = date.substring(0, 10);
   return (
     <>
     <tr  className='text-center'>
         <td>1</td>
-        <td>firstchild</td>
-        <td>secondchild</td>
-        <td>thirdchild</td>
-        <td className='d-flex'>
-          <button className='buttonedit'>Edit</button>
-          <button className='buttondelete'>Delete</button>
-        </td>
+        <td>{title}</td>
+        <td>{category}</td>
+        <td>{Date}</td>
     </tr>
     </>
   )
